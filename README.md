@@ -2,6 +2,78 @@
 
 ## Project is live at: https://undercoder567.github.io/fyle-internship-challenge-23/
 
+## Documentation of testing
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
+import { ApiService } from './services/api.service';
+import { AppComponent } from './app.component';
+
+describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+  let apiService: jasmine.SpyObj<ApiService>;
+
+  beforeEach(async () => {
+    const apiServiceSpy = jasmine.createSpyObj('ApiService', ['getUser', 'getRepos', 'getPaginatedRepos']);
+
+    await TestBed.configureTestingModule({
+      declarations: [AppComponent],
+      providers: [{ provide: ApiService, useValue: apiServiceSpy }]
+    }).compileComponents();
+
+    apiService = TestBed.inject(ApiService) as jasmine.SpyObj<ApiService>;
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+  });
+
+  it('should create the app', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should call getUser and getRepos methods of ApiService on ngOnInit', () => {
+    const userResponse = { name: 'John Doe', avatar_url: 'image-url' };
+    const reposResponse = [{ name: 'repo1' }, { name: 'repo2' }];
+
+    apiService.getUser.and.returnValue(of(userResponse));
+    apiService.getRepos.and.returnValue(of(reposResponse));
+
+    component.ngOnInit();
+
+    expect(apiService.getUser).toHaveBeenCalledWith('johnpapa');
+    expect(apiService.getRepos).toHaveBeenCalledWith('johnpapa');
+  });
+
+  // Add more test cases for other methods
+});
+
+## This is the code to test service and component below i will guide how to run it.
+## Install Dependencies: Make sure you have Node.js and npm installed on your system.
+
+## Install Angular CLI: If you haven't installed Angular CLI globally, you can do so by running the following command:
+npm install -g @angular/cli
+
+## Install Project Dependencies: Run the following command to install all the necessary dependencies:
+npm i
+
+## Run Unit Tests: To execute the unit tests, use the following command:
+ng test
+
+## View Test Results: After running the tests, you can view the test results in the terminal/command prompt. Additionally, a browser window will open with the Karma test runner interface, showing the test results in a graphical format.
+
+## Interpreting Test Results
+### Passing Tests: Green checkmarks indicate that the tests have passed successfully.
+### Failing Tests: Red cross marks indicate that the tests have failed. Review the error messages and stack traces to identify the cause of failure.
+### Coverage Report: After running the tests, you can also find a coverage report in the terminal/command prompt. This report shows the percentage of code coverage by the unit tests.
+
+## Additional Notes
+Ensure that the AppComponent and ApiService files have corresponding spec.ts files for their unit tests.
+Update the test files (spec.ts) with appropriate mock responses and test cases to achieve 100% code coverage.
+Make sure all dependencies are properly installed and up-to-date before running the tests.
+By following these steps, you can successfully run the unit tests for the Angular application and verify the functionality and reliability of the components and services.
+
 ## Who is this for?
 
 This challenge is meant for candidates who wish to intern at Fyle and work with our engineering team. The candidate should be able to commit to at least 6 months of dedicated time for internship.
