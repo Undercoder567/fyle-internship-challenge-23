@@ -1,0 +1,35 @@
+.repo-box {
+    width: 300px; /* Set a fixed width for the repository boxes */
+    padding: 20px; /* Add padding to create space between content and edges */
+    margin: 10px; /* Add margin to create space between boxes */
+    border: 1px solid #ccc; /* Add a border for visual separation */
+    border-radius: 8px; /* Add rounded corners */
+    overflow: hidden; /* Hide any content that overflows the box */
+  }
+  
+  .repo-box svg {
+    display: block; /* Ensure SVG icon is displayed as block to prevent alignment issues */
+    margin: 0 auto; /* Center the SVG icon */
+  }
+  
+  .repo-box p {
+    margin-top: 10px; /* Add space between repository name and description */
+  }
+  
+  .repo-box .flex-wrap {
+    margin-top: 10px; /* Add space between description and topics */
+  }
+  
+  .repo-box .flex-wrap span {
+    margin-right: 5px; /* Add space between topics */
+    margin-bottom: 5px; /* Add space between rows of topics */
+  }
+
+  .current-page {
+    background-color: violet;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+  }
+  
+  
